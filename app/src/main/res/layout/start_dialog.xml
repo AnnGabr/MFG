@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackground1"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:gravity="center"
+        android:text="@string/calculate_sum"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/game_rules"
+        android:scaleType="fitCenter"
+        android:src="@drawable/game_rule"
+        android:weightSum="50"
+        app:srcCompat="@drawable/game_rule" />
+
+    <Button
+        android:id="@+id/confirmBut"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:elevation="0dp"
+        android:text="@string/go"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

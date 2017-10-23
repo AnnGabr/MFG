@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Perfection</string>
+    <string name="start">Start</string>
+    <string name="go">GO</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="back">back</string>
+    <string name="clear">C</string>
+    <string name="registered">Have fun =)</string>
+    <string name="not_registered">Nick is already used =(</string>
+    <string name="bad_password">Bad nickname...</string>
+    <string name="Records">Records</string>
+    <string name="Theme">Theme</string>
+    <string name="Nickname">Nickname</string>
+    <string name="Hello">HeLLo</string>
+    <string name="records_header">Top 10</string>
+    <string name="MFG">MFG</string>
+    <string name="calculate_sum">Calculate sum of digits</string>
+    <string name="game_rules">game rules</string>
+    <string name="register">register</string>
+</resources>
