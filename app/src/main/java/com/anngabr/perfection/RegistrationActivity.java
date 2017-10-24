@@ -2,8 +2,10 @@ package com.anngabr.perfection;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -11,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import db_manager.DBAdapter;
 import player.Player;
@@ -72,31 +76,26 @@ public class RegistrationActivity extends AppCompatActivity {
 
         boolean added = dbAdapter.addPlayer(name);
         if(added) {
-            Player.instance = new Player(name);
-            savePlayerInfoToFile();
+            saveToSharedPref(name);
             showToast(getString(R.string.registered));
-            goToMenu();
+            goToActivity(MenuActivity.class);
         }
         else
             showToast(getString(R.string.not_registered));
     }
 
-    private void savePlayerInfoToFile() {
-        new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    PlayerDataWriteReader.writePlayerData(getApplicationContext());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.run();
+    private void saveToSharedPref(String name) {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.saved_player_nick), name);
+        editor.putInt(getString(R.string.saved_high_score), 0);
+        editor.putInt(getString(R.string.saved_last_score), 0);
+        editor.commit();
     }
 
-    private void goToMenu() {
-        Intent menuActivity = new Intent(this, MenuActivity.class);
-        startActivity(menuActivity);
+    private void goToActivity(Class activityClass) {
+        Intent activity = new Intent(this, activityClass);
+        startActivity(activity);
         finish();
     }
 

@@ -16,7 +16,7 @@
     <string name="clear">C</string>
     <string name="registered">Have fun =)</string>
     <string name="not_registered">Nick is already used =(</string>
-    <string name="bad_password">Bad nickname...</string>
+    <string name="bad_password">Bad nickname…</string>
     <string name="Records">Records</string>
     <string name="Theme">Theme</string>
     <string name="Nickname">Nickname</string>
@@ -26,4 +26,7 @@
     <string name="calculate_sum">Calculate sum of digits</string>
     <string name="game_rules">game rules</string>
     <string name="register">register</string>
+    <string name="saved_player_nick">nick</string>
+    <string name="saved_high_score">high_score</string>
+    <string name="saved_last_score">last_score</string>
 </resources>
