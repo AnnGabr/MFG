@@ -85,7 +85,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void saveToSharedPref(String name) {
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.saved_player_nick), name);
         editor.putInt(getString(R.string.saved_high_score), 0);

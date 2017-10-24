@@ -1,8 +1,11 @@
 package com.anngabr.perfection;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -16,26 +19,20 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         if(readPlayerData())
-            startActivity(MenuActivity.class);
+            goToActivity(MenuActivity.class);
         else
-            startActivity(RegistrationActivity.class);
+            goToActivity(RegistrationActivity.class);
 
         finish();
     }
 
     private boolean readPlayerData() {
-        try {
-            PlayerDataWriteReader.readPlayerData(getApplicationContext());
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return false;
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String nick = sharedPref.getString(getString(R.string.saved_player_nick), "");
+        return !nick.isEmpty();
     }
 
-    private void startActivity(Class activityClass) {
+    private void goToActivity(Class activityClass) {
         Intent gameActivity = new Intent(this, activityClass);
         startActivity(gameActivity);
     }
