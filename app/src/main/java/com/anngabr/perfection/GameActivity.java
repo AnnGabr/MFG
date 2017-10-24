@@ -41,6 +41,23 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     GameController game;
     int numberOfDigits = 4;
     boolean loose;
+    boolean paused;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(digitsViewAnimator.isRunning()) {
+            paused = true;
+            digitsViewAnimator.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(paused)
+            digitsViewAnimator.resume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +78,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setValues() {
         setObjectAnimator();
-
         game = new GameController(numberOfDigits);
-
+        paused = false;
         scoreTV.setText(String.format("%d", game.score));
         digitsTV.setVisibility(View.INVISIBLE);
     }
