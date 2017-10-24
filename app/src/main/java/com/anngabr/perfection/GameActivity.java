@@ -13,9 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import custom_controls.StartDialogFragment;
+import dialogs.StartDialogFragment;
 import game.GameController;
-import game.player.Player;
 
 import static com.anngabr.perfection.R.id.backBut;
 import static com.anngabr.perfection.R.id.clearBut;
@@ -33,15 +32,12 @@ import static com.anngabr.perfection.R.id.val_9;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static GameActivity instance;
-
     TextView playerInputTextV;
     TextView scoreTV;
     TextView digitsTV;
 
     ObjectAnimator digitsViewAnimator;
 
-    Player player;
     GameController game;
     int numberOfDigits = 4;
     boolean loose;
@@ -67,7 +63,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setObjectAnimator();
 
         game = new GameController(numberOfDigits);
-        instance = this;
 
         scoreTV.setText(String.format("%d", game.score));
         digitsTV.setVisibility(View.INVISIBLE);
@@ -112,10 +107,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-    }
-
-    private void updateScore() {
-        scoreTV.setText(String.format("%d", ++game.score));
     }
 
     private void showStartDialog() {
@@ -169,6 +160,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         {
             loose = false;
             clearPlayerInput();
+            updateScore();
             digitsViewAnimator.end();
             digitsViewAnimator.start();
         }
@@ -184,6 +176,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 playerInputTextV.setText("");
             }
         }, 300);
+    }
+
+    private void updateScore() {
+        scoreTV.setText(String.format("%d", ++game.score));
     }
 
     private void goToMenuAndSaveResult() {
@@ -202,9 +198,5 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         editor.commit();
 
         finish();
-    }
-
-    public static GameActivity getInstance(){
-        return instance;
     }
 }

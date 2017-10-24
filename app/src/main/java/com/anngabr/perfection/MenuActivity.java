@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 public class MenuActivity extends AppCompatActivity {
 
     private Button startBtn;
@@ -28,9 +26,6 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void showPlayerData(){
-        String nick = sharedPref.getString(getString(R.string.saved_player_nick), "");
-        playerNameTextV.setText(nick);
-
         int last_score = sharedPref.getInt(getString(R.string.saved_last_score), 0);
         int high_score = sharedPref.getInt(getString(R.string.saved_high_score), 0);
         if(last_score > 0)
@@ -59,6 +54,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private void setValues() {
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String nick = sharedPref.getString(getString(R.string.saved_player_nick), "");
+        playerNameTextV.setText(nick);
     }
 
     private void setListeners() {

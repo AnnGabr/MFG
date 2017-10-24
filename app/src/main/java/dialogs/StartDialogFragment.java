@@ -1,4 +1,4 @@
-package custom_controls;
+package dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -43,7 +43,6 @@ public class StartDialogFragment extends DialogFragment implements View.OnClickL
     }
 
     private void startGame(){
-        if (GameActivity.getInstance() != null)
-            GameActivity.getInstance().startGame();
+        ((GameActivity) getActivity()).startGame();
     }
 }
