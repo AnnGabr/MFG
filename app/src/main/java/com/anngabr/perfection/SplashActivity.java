@@ -5,11 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-
-import java.io.IOException;
-
-import player.PlayerDataWriteReader;
 
 public class SplashActivity extends AppCompatActivity {
 

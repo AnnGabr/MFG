@@ -1,20 +1,13 @@
 package com.anngabr.perfection;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
-
-import db_manager.DBAdapter;
-import player.Player;
-import player.PlayerDataWriteReader;
-
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -25,6 +18,14 @@ public class MenuActivity extends AppCompatActivity {
     private TextView playerNameTextV;
     private TextView recordTextV;
     private TextView lastScoreTextV;
+
+    private SharedPreferences sharedPref;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showPlayerData();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,45 +43,46 @@ public class MenuActivity extends AppCompatActivity {
         playerNameTextV = (TextView) findViewById(R.id.playerNameTextV);
         recordTextV = (TextView) findViewById(R.id.recordTextV);
         lastScoreTextV = (TextView) findViewById(R.id.lastScoreTextV);
-
     }
 
     private void setValues() {
         instance = this;
-        playerNameTextV.setText(Player.instance.getName());
-        showPlayerScore();
+        sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
     }
 
     private void setListeners() {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(GameActivity.class);
+                goToActivity(GameActivity.class);
             }
         });
         recordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(RecordsActivity.class);
+                goToActivity(RecordsActivity.class);
             }
         });
     }
 
-    private void startActivity(Class activityClass) {
+    private void goToActivity(Class activityClass) {
         Intent gameActivity = new Intent(this, activityClass);
         startActivity(gameActivity);
     }
 
-    public static MenuActivity getInstance(){
-        return instance;
+    private void showPlayerData(){
+        String nick = sharedPref.getString(getString(R.string.saved_player_nick), "");
+        playerNameTextV.setText(nick);
+
+        int last_score = sharedPref.getInt(getString(R.string.saved_last_score), 0);
+        int high_score = sharedPref.getInt(getString(R.string.saved_high_score), 0);
+        if(last_score > 0)
+            lastScoreTextV.setText(Integer.toString(last_score));
+        if(high_score > 0)
+            recordTextV.setText(Integer.toString(high_score));
     }
 
-    public void showPlayerScore(){
-        if(Player.instance.getRecord() > 0)
-            recordTextV.setText(Integer.toString(Player.instance.getRecord()));
-        if(Player.instance.getLastScore() > 0)
-            lastScoreTextV.setText(Integer.toString(Player.instance.getLastScore()));
-        else
-            lastScoreTextV.setText("");
+    public static MenuActivity getInstance(){
+        return instance;
     }
 }
