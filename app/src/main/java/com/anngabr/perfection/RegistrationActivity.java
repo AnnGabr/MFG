@@ -83,6 +83,7 @@ public class RegistrationActivity extends AppCompatActivity {
         editor.putString(getString(R.string.saved_player_nick), name);
         editor.putInt(getString(R.string.saved_high_score), 0);
         editor.putInt(getString(R.string.saved_last_score), 0);
+        editor.putBoolean(getString(R.string.saved_state_changed), true);
         editor.commit();
     }
 

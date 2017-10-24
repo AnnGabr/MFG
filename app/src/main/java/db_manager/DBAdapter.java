@@ -1,18 +1,16 @@
 package db_manager;
 
-import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.constraint.solver.ArrayLinkedVariables;
 
 import java.util.ArrayList;
 
-import player.Player;
+import game.player.Player;
 
 /**
- * Created by Ann on 19.10.2017.
+ * Created by Ann Gabrusionok on 19.10.2017.
  */
 
 public class DBAdapter {
@@ -29,9 +27,8 @@ public class DBAdapter {
         cv.put("name", playerName);
         cv.put("record", 0);
         long res = db.insert(DBHelper.USERS_TABLE_NAME, null, cv);
-        if(res == -1)
-            return false;
-        return true;
+
+        return res != -1;
     }
 
     public boolean updatePlayerRecord(String playerName, int record){
@@ -39,7 +36,7 @@ public class DBAdapter {
         cv.put("record", record);
         int numOfRowsEffected = db.update(DBHelper.USERS_TABLE_NAME, cv, "" + DBHelper.NAME_COL + "=?", new String[]{playerName});
 
-        return (numOfRowsEffected == 0) ? false:true;
+        return numOfRowsEffected != 0;
     }
 
     public ArrayList<Player> getFirstNPlayersInTop(int n){

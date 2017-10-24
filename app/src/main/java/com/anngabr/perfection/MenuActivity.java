@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MenuActivity extends AppCompatActivity {
+import java.util.Locale;
 
-    private static MenuActivity instance;
+public class MenuActivity extends AppCompatActivity {
 
     private Button startBtn;
     private Button recordBtn;
@@ -25,6 +25,18 @@ public class MenuActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         showPlayerData();
+    }
+
+    private void showPlayerData(){
+        String nick = sharedPref.getString(getString(R.string.saved_player_nick), "");
+        playerNameTextV.setText(nick);
+
+        int last_score = sharedPref.getInt(getString(R.string.saved_last_score), 0);
+        int high_score = sharedPref.getInt(getString(R.string.saved_high_score), 0);
+        if(last_score > 0)
+            lastScoreTextV.setText(String.format("%d", last_score));
+        if(high_score > 0)
+            recordTextV.setText(String.format("%d", high_score));
     }
 
     @Override
@@ -46,7 +58,6 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void setValues() {
-        instance = this;
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
     }
 
@@ -68,21 +79,5 @@ public class MenuActivity extends AppCompatActivity {
     private void goToActivity(Class activityClass) {
         Intent gameActivity = new Intent(this, activityClass);
         startActivity(gameActivity);
-    }
-
-    private void showPlayerData(){
-        String nick = sharedPref.getString(getString(R.string.saved_player_nick), "");
-        playerNameTextV.setText(nick);
-
-        int last_score = sharedPref.getInt(getString(R.string.saved_last_score), 0);
-        int high_score = sharedPref.getInt(getString(R.string.saved_high_score), 0);
-        if(last_score > 0)
-            lastScoreTextV.setText(Integer.toString(last_score));
-        if(high_score > 0)
-            recordTextV.setText(Integer.toString(high_score));
-    }
-
-    public static MenuActivity getInstance(){
-        return instance;
     }
 }

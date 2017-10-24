@@ -30,4 +30,5 @@
     <string name="saved_high_score">high_score</string>
     <string name="saved_last_score">last_score</string>
     <string name="preference_file_key">PLAYER_DATA</string>
+    <string name="saved_state_changed">state_changed</string>
 </resources>

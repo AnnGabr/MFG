@@ -3,23 +3,19 @@ package com.anngabr.perfection;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
 
 import custom_controls.StartDialogFragment;
-import db_manager.DBAdapter;
 import game.GameController;
-import player.Player;
-import player.PlayerDataWriteReader;
+import game.player.Player;
 
 import static com.anngabr.perfection.R.id.backBut;
 import static com.anngabr.perfection.R.id.clearBut;
@@ -37,23 +33,18 @@ import static com.anngabr.perfection.R.id.val_9;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static GameActivity gameActivityInstance;
+    private static GameActivity instance;
 
     TextView playerInputTextV;
     TextView scoreTV;
     TextView digitsTV;
 
-    GameController game;
-
     ObjectAnimator digitsViewAnimator;
 
+    Player player;
+    GameController game;
     int numberOfDigits = 4;
-
     boolean loose;
-
-    public static GameActivity getInstance(){
-        return gameActivityInstance;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +67,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setObjectAnimator();
 
         game = new GameController(numberOfDigits);
-        gameActivityInstance = this;
+        instance = this;
 
-        scoreTV.setText(Integer.toString(game.score));
+        scoreTV.setText(String.format("%d", game.score));
         digitsTV.setVisibility(View.INVISIBLE);
     }
 
@@ -124,7 +115,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateScore() {
-        scoreTV.setText(Integer.toString(++game.score));
+        scoreTV.setText(String.format("%d", ++game.score));
     }
 
     private void showStartDialog() {
@@ -133,7 +124,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void startGame() {
-        Player.instance.setNewRecord(false);
         digitsTV.setVisibility(View.VISIBLE);
         digitsViewAnimator.start();
     }
@@ -178,7 +168,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if(game.getDigitSum() == playerCalculations)
         {
             loose = false;
-            updateScore();
             clearPlayerInput();
             digitsViewAnimator.end();
             digitsViewAnimator.start();
@@ -198,50 +187,24 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void goToMenuAndSaveResult() {
-        if(game.score < Player.instance.getRecord()){
-            Player.instance.setLastScore(game.score);
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+        int high_score = sharedPref.getInt(getString(R.string.saved_high_score), 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if(game.score < high_score){
+            editor.putInt(getString(R.string.saved_last_score), game.score);
         }
-        else if(game.score != Player.instance.getLastScore()){
-            Player.instance.setLastScore(0);
-            Player.instance.setRecord(game.score);
-            Player.instance.setNewRecord(true);
-            updatePlayerRecordInDB();
+        else {
+            editor.putInt(getString(R.string.saved_high_score), game.score);
+            editor.putInt(getString(R.string.saved_last_score), 0);
+            editor.putBoolean(getString(R.string.saved_state_changed), true);
         }
+        editor.commit();
 
-        updatePlayerInfoInFile();
-        updatePlayerInfoInMenu();
-        this.finish();
+        finish();
     }
 
-    private void updatePlayerInfoInFile() {
-        new Runnable(){
-            @Override
-            public void run() {
-                try {
-                    PlayerDataWriteReader.writePlayerData(getApplicationContext());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }.run();
-    }
-
-    private void updatePlayerRecordInDB() {
-        new Runnable(){
-            @Override
-            public void run() {
-                if (Player.instance.hasNewRecord()) {
-                    DBAdapter dbAdapter = new DBAdapter(getApplicationContext());
-                    dbAdapter.updatePlayerRecord(Player.instance.getName(), Player.instance.getRecord());
-                    dbAdapter.closeDB();
-                }
-            }
-        }.run();
-    }
-
-    private void updatePlayerInfoInMenu() {
-        if (MenuActivity.getInstance() != null)
-            MenuActivity.getInstance().showPlayerScore();
+    public static GameActivity getInstance(){
+        return instance;
     }
 }

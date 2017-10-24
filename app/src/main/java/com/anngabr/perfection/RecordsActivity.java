@@ -11,10 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
 import java.util.ArrayList;
 
 import db_manager.DBAdapter;
-import player.Player;
+import game.player.Player;
 
 public class RecordsActivity extends AppCompatActivity {
 
@@ -36,18 +37,18 @@ public class RecordsActivity extends AppCompatActivity {
     private void fillList() {
         DBAdapter dbAdapter = new DBAdapter(this);
 
-        int recCount = 10;
-        recordsListV.setAdapter(new PlayerAdapter(this, dbAdapter.getFirstNPlayersInTop(recCount)));
+        int N = 10;
+        recordsListV.setAdapter(new PlayerAdapter(this, dbAdapter.getFirstNPlayersInTop(N)));
     }
 
     private class PlayerAdapter extends ArrayAdapter<Player> {
 
-        public PlayerAdapter(@NonNull Context context, ArrayList<Player> players) {
+        private PlayerAdapter(@NonNull Context context, ArrayList<Player> players) {
             super(context, R.layout.records_list_item, players);
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public @NonNull View getView(int position, View convertView, @NonNull ViewGroup parent) {
             Player player = getItem(position);
 
             if (convertView == null) {
@@ -57,7 +58,7 @@ public class RecordsActivity extends AppCompatActivity {
             ((TextView) convertView.findViewById(R.id.rl_nameTextV))
                     .setText(player.getName());
             ((TextView) convertView.findViewById(R.id.rl_recordTextV))
-                    .setText(Integer.toString(player.getRecord()));
+                    .setText(String.format("%d", player.getRecord()));
 
             return convertView;
         }
