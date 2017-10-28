@@ -5,14 +5,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import custom.listeners.OnSwipeTouchListener;
 
 public class MenuActivity extends AppCompatActivity {
 
     private Button startBtn;
     private Button recordBtn;
+    private Button themeBtn;
     private TextView playerNameTextV;
     private TextView recordTextV;
     private TextView lastScoreTextV;
@@ -45,6 +50,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void setControls() {
+        themeBtn = (Button) findViewById(R.id.themeBtn);
         startBtn = (Button) findViewById(R.id.startBtn);
         recordBtn = (Button) findViewById(R.id.recordBtn);
         playerNameTextV = (TextView) findViewById(R.id.playerNameTextV);
@@ -68,7 +74,22 @@ public class MenuActivity extends AppCompatActivity {
         recordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToActivity(RecordsActivity.class);
+                showToast(getString(R.string.info_not_supported));
+                //goToActivity(RecordsActivity.class);
+            }
+        });
+        themeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast(getString(R.string.info_not_supported));
+            }
+        });
+        findViewById(R.id.menuLayout).setOnTouchListener(new OnSwipeTouchListener(this){
+            public void onSwipeLeft(){
+                goToActivity(GameActivity.class);
+            }
+            public void onSwipeRight(){
+                finish();
             }
         });
     }
@@ -76,5 +97,11 @@ public class MenuActivity extends AppCompatActivity {
     private void goToActivity(Class activityClass) {
         Intent gameActivity = new Intent(this, activityClass);
         startActivity(gameActivity);
+    }
+
+    private void showToast(String s) {
+        Toast toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.show();
     }
 }

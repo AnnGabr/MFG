@@ -72,6 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
             saveToSharedPref(name);
             showToast(getString(R.string.registered));
             goToActivity(MenuActivity.class);
+            finish();
         }
         else
             showToast(getString(R.string.not_registered));
@@ -90,7 +91,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private void goToActivity(Class activityClass) {
         Intent activity = new Intent(this, activityClass);
         startActivity(activity);
-        finish();
     }
 
     private void showToast(String s) {

@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import dialogs.StartDialogFragment;
+import custom.dialogs.StartDialogFragment;
 import game.GameController;
 
 import static com.anngabr.perfection.R.id.backBut;
