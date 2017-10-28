@@ -33,10 +33,8 @@ public class MenuActivity extends AppCompatActivity {
     private void showPlayerData(){
         int last_score = sharedPref.getInt(getString(R.string.saved_last_score), 0);
         int high_score = sharedPref.getInt(getString(R.string.saved_high_score), 0);
-        if(last_score > 0)
-            lastScoreTextV.setText(String.format("%d", last_score));
-        if(high_score > 0)
-            recordTextV.setText(String.format("%d", high_score));
+        lastScoreTextV.setText(String.format("%d", last_score));
+        recordTextV.setText(String.format("%d", high_score));
     }
 
     @Override
@@ -75,13 +73,12 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showToast(getString(R.string.info_not_supported));
-                //goToActivity(RecordsActivity.class);
             }
         });
         themeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast(getString(R.string.info_not_supported));
+                goToActivity(ThemeActivity.class);
             }
         });
         findViewById(R.id.menuLayout).setOnTouchListener(new OnSwipeTouchListener(this){

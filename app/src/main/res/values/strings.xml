@@ -20,7 +20,7 @@
     <string name="Records">Records</string>
     <string name="Theme">Theme</string>
     <string name="Nickname">Nickname</string>
-    <string name="Hello">HeLLo</string>
+    <string name="Hello">HELLO</string>
     <string name="records_header">Top 10</string>
     <string name="MFG">MFG</string>
     <string name="calculate_sum">Calculate sum of digits</string>
@@ -32,4 +32,5 @@
     <string name="preference_file_key">PLAYER_DATA</string>
     <string name="saved_state_changed">state_changed</string>
     <string name="info_not_supported">Not supported yet=(</string>
+    <string name="apply">Apply</string>
 </resources>

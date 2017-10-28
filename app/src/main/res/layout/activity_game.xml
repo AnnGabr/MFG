@@ -36,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorBtn1"
             android:text="@string/_0"
             android:textSize="24sp" />
 
@@ -45,7 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary1"
             android:text="@string/_1"
             android:textSize="24sp" />
 
@@ -54,7 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorBtn1"
             android:text="@string/_2"
             android:textSize="24sp" />
 
@@ -63,7 +60,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary1"
             android:text="@string/_3"
             android:textSize="24sp" />
 
@@ -72,7 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorBtn1"
             android:text="@string/_4"
             android:textSize="24sp" />
     </LinearLayout>
@@ -95,7 +90,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorBtn1"
             android:text="@string/_5"
             android:textSize="24sp" />
 
@@ -104,7 +98,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary1"
             android:text="@string/_6"
             android:textSize="24sp"
             tools:ignore="HardcodedText" />
@@ -114,7 +107,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorBtn1"
             android:text="@string/_7"
             android:textSize="24sp" />
 
@@ -123,7 +115,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary1"
             android:text="@string/_8"
             android:textSize="24sp" />
 
@@ -132,7 +123,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorBtn1"
             android:text="@string/_9"
             android:textSize="24sp"
             tools:ignore="HardcodedText" />
