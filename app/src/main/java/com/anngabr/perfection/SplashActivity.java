@@ -10,6 +10,7 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        applyTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
@@ -19,6 +20,12 @@ public class SplashActivity extends AppCompatActivity {
             goToActivity(RegistrationActivity.class);
 
         finish();
+    }
+
+    private void applyTheme() {
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_theme_file_key), Context.MODE_PRIVATE);
+        int themeId = sharedPref.getInt(getString(R.string.saved_theme_id), R.style.GreenLightBlueTheme);
+        setTheme(themeId);
     }
 
     private boolean readPlayerData() {

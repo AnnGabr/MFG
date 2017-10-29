@@ -1,13 +1,12 @@
 package com.anngabr.perfection;
 
-import android.content.DialogInterface;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,8 +16,8 @@ import custom.dialogs.ImageButDialogFragment;
 
 public class ThemeActivity extends AppCompatActivity{
 
+    Theme selectedTheme;
     ListView recordsListV;
-    ArrayList<Theme> themes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,21 +38,23 @@ public class ThemeActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ThemeAdapter ta = (ThemeAdapter) parent.getAdapter();
-                Theme t = ta.getItem(position);
-                showApplyDialog(t);
+                selectedTheme = ta.getItem(position);
+                showApplyDialog();
             }
         });
     }
 
-    private void showApplyDialog(Theme t) {
-        ImageButDialogFragment dialog = new ImageButDialogFragment(t.getImgResId(), R.string.apply, t.getName()){
+    private void showApplyDialog() {
+        ImageButDialogFragment dialog = new ImageButDialogFragment(selectedTheme.getImgResId(), R.string.apply, selectedTheme.getName()){
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_theme_file_key), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt(getString(R.string.saved_theme_id), selectedTheme.getThemeResId());
+                editor.commit();
+
+                getActivity().finish();
                 dismiss();
-            }
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                super.onDismiss(dialog);
             }
         };
 
@@ -61,7 +62,7 @@ public class ThemeActivity extends AppCompatActivity{
     }
 
     private void fillList() {
-        themes = new ArrayList<>();
+        ArrayList<Theme> themes = new ArrayList<>();
         themes.add(new Theme(R.string.glb_theme_name, R.drawable.green_light_blue, R.style.GreenLightBlueTheme));
         themes.add(new Theme(R.string.pa_theme_name, R.drawable.purple_addict, R.style.PurpleAddictTheme));
 

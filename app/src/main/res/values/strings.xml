@@ -36,4 +36,6 @@
     <string name="themes">Theme</string>
     <string name="glb_theme_name">GreenLightBlue</string>
     <string name="pa_theme_name">PurpleAddict</string>
+    <string name="saved_theme_id">theme_id</string>
+    <string name="preference_theme_file_key">THEME_DATA</string>
 </resources>
