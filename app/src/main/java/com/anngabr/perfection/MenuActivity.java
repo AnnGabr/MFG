@@ -17,6 +17,8 @@ import custom.listeners.OnSwipeTouchListener;
 
 public class MenuActivity extends AppCompatActivity {
 
+    private static MenuActivity instance;
+
     private Button startBtn;
     private Button recordBtn;
     private Button themeBtn;
@@ -44,6 +46,8 @@ public class MenuActivity extends AppCompatActivity {
         Util.setAppTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        instance = this;
 
         setControls();
         setValues();
@@ -84,7 +88,6 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToActivity(ThemeActivity.class);
-                finish();
             }
         });
 
@@ -107,5 +110,9 @@ public class MenuActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 0, 0);
         toast.show();
+    }
+
+    public static MenuActivity getInstance(){
+        return instance;
     }
 }

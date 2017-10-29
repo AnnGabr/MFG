@@ -3,8 +3,10 @@ package com.anngabr.perfection;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,6 +23,11 @@ public class ThemeActivity extends AppCompatActivity{
 
     Theme selectedTheme;
     ListView recordsListV;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,22 +59,30 @@ public class ThemeActivity extends AppCompatActivity{
         ImageButDialogFragment dialog = new ImageButDialogFragment(selectedTheme.getImgResId(), R.string.apply, selectedTheme.getName()){
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_theme_file_key), Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putInt(getString(R.string.saved_theme_id), selectedTheme.getThemeResId());
-                editor.commit();
-
                 dismiss();
-                getActivity().finish();
-                goToActivity(MenuActivity.class);
+                setContentView(R.layout.activity_splash);
+
+                rememberSelectedTheme();
+                goToMenuActivity();
+
+                finish();
             }
         };
 
         dialog.show(getFragmentManager(), "apply dialog");
     }
 
-    public void goToActivity(Class activityClass) {
-        Intent gameActivity = new Intent(this, activityClass);
+    private void rememberSelectedTheme() {
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_theme_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(getString(R.string.saved_theme_id), selectedTheme.getThemeResId());
+        editor.commit();
+    }
+
+    public void goToMenuActivity() {
+        if(MenuActivity.getInstance() != null)
+            MenuActivity.getInstance().finish();
+        Intent gameActivity = new Intent(this, MenuActivity.class);
         startActivity(gameActivity);
     }
 
