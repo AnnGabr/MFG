@@ -16,7 +16,7 @@ import com.anngabr.perfection.R;
  * Created by Ann on 07.10.2017.
  */
 
-public class StartDialogFragment extends DialogFragment implements View.OnClickListener{
+public class ImageButDialogFragment extends DialogFragment implements View.OnClickListener{
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -33,16 +33,10 @@ public class StartDialogFragment extends DialogFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        dismiss();
     }
 
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        startGame();
-    }
-
-    private void startGame(){
-        ((GameActivity) getActivity()).startGame();
     }
 }

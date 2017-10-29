@@ -1,4 +1,4 @@
-package game.player;
+package custom.adapters.player_adapter.player;
 
 /**
  * Created by Ann Gabrusionok on 24.10.2017.

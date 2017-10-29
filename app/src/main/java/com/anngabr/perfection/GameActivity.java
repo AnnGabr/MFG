@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import custom.dialogs.StartDialogFragment;
+import custom.dialogs.ImageButDialogFragment;
 import game.GameController;
 
 import static com.anngabr.perfection.R.id.backBut;
@@ -126,7 +127,17 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showStartDialog() {
-        StartDialogFragment dialog = new StartDialogFragment();
+        ImageButDialogFragment dialog = new ImageButDialogFragment(){
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                super.onDismiss(dialog);
+                startGame();
+            }
+        };
         dialog.show(getFragmentManager(), "start dialog");
     }
 

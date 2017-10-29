@@ -24,13 +24,16 @@
     <string name="records_header">Top 10</string>
     <string name="MFG">MFG</string>
     <string name="calculate_sum">Calculate sum of digits</string>
-    <string name="game_rules">game rules</string>
-    <string name="register">register</string>
-    <string name="saved_player_nick">nick</string>
-    <string name="saved_high_score">high_score</string>
-    <string name="saved_last_score">last_score</string>
+    <string name="game_rules">Game rules</string>
+    <string name="register">Register</string>
+    <string name="saved_player_nick">Nick</string>
+    <string name="saved_high_score">High_score</string>
+    <string name="saved_last_score">Last_score</string>
     <string name="preference_file_key">PLAYER_DATA</string>
-    <string name="saved_state_changed">state_changed</string>
+    <string name="saved_state_changed">State_changed</string>
     <string name="info_not_supported">Not supported yet=(</string>
     <string name="apply">Apply</string>
+    <string name="themes">Theme</string>
+    <string name="glb_theme_name">GreenLightBlue</string>
+    <string name="pa_theme_name">PurpleAddict</string>
 </resources>
