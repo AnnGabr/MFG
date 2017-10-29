@@ -5,23 +5,23 @@ package custom.adapters.theme_adapter;
  */
 
 public class Theme {
-    private String name;
+    private int name;
     private int imgResId;
     private int themeResId;
 
     public Theme(){}
 
-    public Theme(String name, int imgResId, int themeResId){
+    public Theme(int name, int imgResId, int themeResId){
         this.name = name;
         this.imgResId = imgResId;
         this.themeResId = themeResId;
     }
 
-    public String getName() {
+    public int getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(int name) {
         this.name = name;
     }
 

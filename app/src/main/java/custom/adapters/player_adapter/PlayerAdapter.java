@@ -1,4 +1,4 @@
-package custom.adapters.player_adapter.player;
+package custom.adapters.player_adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

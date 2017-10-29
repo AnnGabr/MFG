@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import custom.adapters.player_adapter.player.Player;
+import custom.adapters.player_adapter.Player;
 
 /**
  * Created by Ann Gabrusionok on 19.10.2017.

@@ -127,7 +127,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showStartDialog() {
-        ImageButDialogFragment dialog = new ImageButDialogFragment(){
+        int title = R.string.game_rules;
+        int img = R.drawable.game_rule;
+        int btnText = R.string.start;
+        ImageButDialogFragment dialog = new ImageButDialogFragment(img, btnText, title){
             @Override
             public void onClick(View v) {
                 dismiss();

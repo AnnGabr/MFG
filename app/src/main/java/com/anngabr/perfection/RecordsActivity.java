@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import custom.adapters.player_adapter.player.PlayerAdapter;
+import custom.adapters.player_adapter.PlayerAdapter;
 import db_manager.DBAdapter;
 
 public class RecordsActivity extends AppCompatActivity {
