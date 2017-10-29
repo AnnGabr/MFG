@@ -1,12 +1,15 @@
 package com.anngabr.perfection;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.anngabr.perfection.utils.Util;
 
 import java.util.ArrayList;
 
@@ -21,6 +24,7 @@ public class ThemeActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setAppTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme);
 
@@ -53,12 +57,18 @@ public class ThemeActivity extends AppCompatActivity{
                 editor.putInt(getString(R.string.saved_theme_id), selectedTheme.getThemeResId());
                 editor.commit();
 
-                getActivity().finish();
                 dismiss();
+                getActivity().finish();
+                goToActivity(MenuActivity.class);
             }
         };
 
         dialog.show(getFragmentManager(), "apply dialog");
+    }
+
+    public void goToActivity(Class activityClass) {
+        Intent gameActivity = new Intent(this, activityClass);
+        startActivity(gameActivity);
     }
 
     private void fillList() {

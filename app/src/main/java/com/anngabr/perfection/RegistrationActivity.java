@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.anngabr.perfection.utils.Util;
+
 import db_manager.DBAdapter;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setAppTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 

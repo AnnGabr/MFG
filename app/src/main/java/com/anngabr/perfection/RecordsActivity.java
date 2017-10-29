@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.anngabr.perfection.utils.Util;
+
 import custom.adapters.player_adapter.PlayerAdapter;
 import db_manager.DBAdapter;
 
@@ -13,6 +15,7 @@ public class RecordsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setAppTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_records);
 

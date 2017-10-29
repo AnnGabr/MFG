@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anngabr.perfection.utils.Util;
+
 import custom.listeners.OnSwipeTouchListener;
 
 public class MenuActivity extends AppCompatActivity {
@@ -39,6 +41,7 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setAppTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
@@ -69,18 +72,22 @@ public class MenuActivity extends AppCompatActivity {
                 goToActivity(GameActivity.class);
             }
         });
+
         recordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showToast(getString(R.string.info_not_supported));
             }
         });
+
         themeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToActivity(ThemeActivity.class);
+                finish();
             }
         });
+
         findViewById(R.id.menuLayout).setOnTouchListener(new OnSwipeTouchListener(this){
             public void onSwipeLeft(){
                 goToActivity(GameActivity.class);

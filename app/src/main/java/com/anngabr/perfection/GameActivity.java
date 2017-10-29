@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.anngabr.perfection.utils.Util;
+
 import custom.dialogs.ImageButDialogFragment;
 import game.GameController;
 
@@ -62,6 +64,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setAppTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
