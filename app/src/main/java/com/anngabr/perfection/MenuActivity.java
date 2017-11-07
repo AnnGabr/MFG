@@ -3,15 +3,21 @@ package com.anngabr.perfection;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anngabr.perfection.utils.MusicPlayer;
 import com.anngabr.perfection.utils.Util;
+
+import java.io.IOException;
 
 import custom.listeners.OnSwipeTouchListener;
 
@@ -27,6 +33,19 @@ public class MenuActivity extends AppCompatActivity {
     private TextView lastScoreTextV;
 
     private SharedPreferences sharedPref;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MusicPlayer.player = MediaPlayer.create(this, R.raw.menu);
+        MusicPlayer.player.setLooping(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MusicPlayer.player.pause();
+    }
 
     @Override
     protected void onResume() {

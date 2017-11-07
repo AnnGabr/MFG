@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.anngabr.perfection.utils.MusicPlayer;
 import com.anngabr.perfection.utils.Util;
 
 import custom.dialogs.ImageButDialogFragment;
@@ -53,6 +55,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             paused = true;
             digitsViewAnimator.pause();
         }
+
+        MusicPlayer.player.pause();
     }
 
     @Override
@@ -60,6 +64,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         if(paused)
             digitsViewAnimator.resume();
+
+        if(!MusicPlayer.player.isPlaying()) {
+            int length = MusicPlayer.player.getCurrentPosition();
+            MusicPlayer.player.seekTo(length);
+            MusicPlayer.player.start();
+        }
     }
 
     @Override
@@ -81,6 +91,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setValues() {
+        MusicPlayer.player = MediaPlayer.create(this, R.raw.game);
+        MusicPlayer.player.setLooping(true);
         setObjectAnimator();
         game = new GameController(numberOfDigits);
         paused = false;
