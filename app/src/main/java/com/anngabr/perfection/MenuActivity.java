@@ -39,12 +39,13 @@ public class MenuActivity extends AppCompatActivity {
         super.onStart();
         MusicPlayer.player = MediaPlayer.create(this, R.raw.menu);
         MusicPlayer.player.setLooping(true);
+        MusicPlayer.player.start();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MusicPlayer.player.pause();
+        MusicPlayer.player.stop();
     }
 
     @Override
